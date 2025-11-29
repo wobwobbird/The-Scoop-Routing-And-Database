@@ -9,7 +9,9 @@
 let database = {
   users: {},
   articles: {},
-  nextArticleId: 1
+  nextArticleId: 1,
+  comments: {},
+  nextCommentId: 1,
 };
 
 //// routes is a JavaScript object containing all of the routes needed for The Scoop.
@@ -37,6 +39,19 @@ const routes = {
   },
   '/articles/:id/downvote': {
     'PUT': downvoteArticle
+  },
+  '/comments': {
+    'POST': createComment
+  },
+  '/comments/:id': {
+    'PUT': updateComment,
+    'DELETE': deleteComment
+  },
+  '/comments/:id/upvote': {
+    'PUT': upvoteComment
+  },
+  '/comments/:id/downvote': {
+    'PUT': downvoteComment
   }
 };
 
@@ -229,6 +244,54 @@ function downvoteArticle(url, request) {
   }
 
   return response;
+}
+
+function createComment(url, request) { // POST
+  const requestComment = request.body && request.body.comment;
+  const response = {};
+
+  if (requestComment && requestComment.body && requestComment.articleId &&
+      database.articles[requestComment.articleId] &&
+      requestComment.username && database.users[requestComment.username]) {
+    const comment = {
+      id: database.nextCommentId++,
+      body: requestComment.body,
+      username: requestComment.username,
+      articleId: requestComment.articleId,
+      upvotedBy: [],
+      downvotedBy: [],
+    };
+    database.comments[comment.id] = comment;
+    database.users[comment.username].commentIds.push(comment.id);
+    database.articles[comment.articleId].commentIds.push(comment.id);
+
+    response.body = {comment: comment};
+    response.status = 201;
+  } else {
+    response.status = 400;
+  }
+
+  return response;
+}
+
+function updateComment(url, request) { // PUT 
+
+
+}
+
+function deleteComment(url, request) { // DELETE /only url is required, 2nd argument will be ignored but keeping to match existing deleteArticle pattern
+
+
+}
+
+function upvoteComment(url, request) { // PUT
+
+
+}
+
+function downvoteComment(url, request) { // PUT
+
+
 }
 
 function upvote(item, username) {
