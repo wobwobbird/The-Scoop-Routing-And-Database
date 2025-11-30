@@ -1,0 +1,98 @@
+users:
+  'micromarshy@gmail.com ':
+    username: 'micromarshy@gmail.com '
+    articleIds:
+      - 1
+      - 2
+    commentIds: []
+  codinjesus:
+    username: codinjesus
+    articleIds: []
+    commentIds:
+      - 1
+  codingpro@gmail.com:
+    username: codingpro@gmail.com
+    articleIds:
+      - 3
+    commentIds:
+      - 2
+  DevMister@gmail.com:
+    username: DevMister@gmail.com
+    articleIds: []
+    commentIds:
+      - 3
+  FatherChristmas@gmail.com:
+    username: FatherChristmas@gmail.com
+    articleIds:
+      - 4
+    commentIds: []
+articles:
+  '1':
+    id: 1
+    title: Help! I need to find a front end developer job
+    url: 'http//:lord.com'
+    username: 'micromarshy@gmail.com '
+    commentIds:
+      - 2
+    upvotedBy:
+      - 'micromarshy@gmail.com '
+    downvotedBy: []
+    comments: []
+  '2':
+    id: 2
+    title: There are no frontend junior developer jobs in 2025
+    url: 'http://www.beans.com'
+    username: 'micromarshy@gmail.com '
+    commentIds:
+      - 1
+    upvotedBy:
+      - FatherChristmas@gmail.com
+    downvotedBy:
+      - 'micromarshy@gmail.com '
+    comments: []
+  '3':
+    id: 3
+    title: 'Help, I''ve lost my cat, Mr. Tabby. And I can''t find him'
+    url: 'https://cat.com'
+    username: codingpro@gmail.com
+    commentIds:
+      - 3
+    upvotedBy: []
+    downvotedBy:
+      - FatherChristmas@gmail.com
+    comments: []
+  '4':
+    id: 4
+    title: 25 DAYS TILL CHRISTMAS!!!
+    url: 'http://hohoho.com'
+    username: FatherChristmas@gmail.com
+    commentIds: []
+    upvotedBy:
+      - FatherChristmas@gmail.com
+    downvotedBy: []
+nextArticleId: 1
+comments:
+  '1':
+    id: 1
+    body: Learn backend
+    username: codinjesus
+    articleId: 2
+    upvotedBy:
+      - codinjesus
+    downvotedBy: []
+  '2':
+    id: 2
+    body: 'There non existent '
+    username: codingpro@gmail.com
+    articleId: 1
+    upvotedBy: []
+    downvotedBy: []
+  '3':
+    id: 3
+    body: HELOOOOOOO wrong forum
+    username: DevMister@gmail.com
+    articleId: 3
+    upvotedBy:
+      - DevMister@gmail.com
+    downvotedBy: []
+nextCommentId: 1
