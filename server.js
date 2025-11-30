@@ -275,13 +275,46 @@ function createComment(url, request) { // POST
 }
 
 function updateComment(url, request) { // PUT 
+  const id = Number(url.split('/').filter(segment => segment)[1]);
+  // const savedArticle = database.articles[id];
+  const savedComment = database.comments[id];
+  const requestComment = request.body && request.body.comment;
+  const response = {};
 
+  if (!id || !requestComment) {
+    response.status = 400;
+  } else if (!savedComment) {
+    response.status = 404;
+  } else {
+    savedComment.body = requestComment.body || savedComment.body;
 
+    response.body = {comment: savedComment};
+    response.status = 200;
+  }
+
+  return response;
 }
 
 function deleteComment(url, request) { // DELETE /only url is required, 2nd argument will be ignored but keeping to match existing deleteArticle pattern
+  const id = Number(url.split('/').filter(segment => segment)[1]);
+  const savedComment = database.comments[id];
+  const response = {};
 
+  if (!id || !savedComment) {
+    response.status = 404;
+  } else {
+    database.comments[id] = null;
 
+    const userCommentIds = database.users[savedComment.username].commentIds;
+    userCommentIds.splice(userCommentIds.indexOf(id), 1);
+
+    const articleCommentsId = database.articles[savedComment.articleId].commentIds;
+    articleCommentsId.splice(articleCommentsId.indexOf(id), 1);
+
+    response.status = 204;
+  }
+
+  return response;
 }
 
 function upvoteComment(url, request) { // PUT
