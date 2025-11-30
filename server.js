@@ -373,6 +373,31 @@ function downvote(item, username) {
   return item;
 }
 
+// save database before running server
+const Figg = require('figg');
+const config = new Figg();
+
+function saveDatabase() {
+  config.set({
+    users: database.users,
+    articles: database.articles,
+    nextArticleId: database.nextArticleId,
+    comments: database.comments,
+    nextCommentId: database.nextCommentId,
+  })
+  config.save();
+}
+
+function loadDatabase() {
+  try {
+    return config.load();
+  } catch (error) {
+    // console.log("yoyoyo");
+    // console.log(error);
+    return null;
+  }
+}
+
 // Write all code above this line.
 
 const http = require('http');
